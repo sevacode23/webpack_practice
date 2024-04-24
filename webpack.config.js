@@ -1,13 +1,17 @@
 const { resolve } = require('path');
 
-module.exports = {
-  mode: 'production',
+module.exports = (env) => {
+  const { mode } = env;
 
-  entry: resolve(__dirname, 'src', 'index.js'),
+  return {
+    mode: mode || 'production',
 
-  output: {
-    path: resolve(__dirname, 'build'),
-    filename: '[name].[contenthash].js',
-    clean: true,
-  },
+    entry: resolve(__dirname, 'src', 'index.js'),
+
+    output: {
+      path: resolve(__dirname, 'build'),
+      filename: '[name].[contenthash].js',
+      clean: true,
+    },
+  };
 };
