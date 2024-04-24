@@ -1,4 +1,5 @@
 const { resolve } = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = (env) => {
   const { mode } = env;
@@ -13,5 +14,11 @@ module.exports = (env) => {
       filename: '[name].[contenthash].js',
       clean: true,
     },
+
+    plugins: [
+      new HtmlWebpackPlugin({
+        template: resolve(__dirname, 'public', 'index.html'),
+      }),
+    ],
   };
 };

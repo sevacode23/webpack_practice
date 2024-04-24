@@ -1,4 +1,4 @@
-import { calculate } from "./test";
+import { calculate } from './test';
 
-console.log("Hello, world!");
-console.log(calculate(2, 4));
+console.log('Hello, world!');
+console.log(calculate(2, 3));
