@@ -7,12 +7,26 @@ module.exports = (env) => {
   return {
     mode: mode || 'production',
 
-    entry: resolve(__dirname, 'src', 'index.js'),
+    entry: resolve(__dirname, 'src', 'index.ts'),
 
     output: {
       path: resolve(__dirname, 'build'),
       filename: '[name].[contenthash].js',
       clean: true,
+    },
+
+    module: {
+      rules: [
+        {
+          test: /\.tsx?$/,
+          use: 'ts-loader',
+          exclude: /node_modules/,
+        },
+      ],
+    },
+
+    resolve: {
+      extensions: ['.tsx', '.ts', '.js'],
     },
 
     plugins: [
