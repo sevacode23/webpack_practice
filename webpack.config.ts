@@ -1,10 +1,17 @@
-const { resolve } = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+import { resolve } from 'path';
+import webpack from 'webpack';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
 
-module.exports = (env) => {
+type TMode = 'development' | 'production';
+
+interface IEnv {
+  mode: TMode;
+}
+
+export default (env: IEnv) => {
   const { mode } = env;
 
-  return {
+  const config: webpack.Configuration = {
     mode: mode || 'production',
 
     entry: resolve(__dirname, 'src', 'index.ts'),
@@ -35,4 +42,6 @@ module.exports = (env) => {
       }),
     ],
   };
+
+  return config;
 };
