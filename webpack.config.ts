@@ -1,15 +1,19 @@
 import { resolve } from 'path';
 import webpack from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
+import type { Configuration as DevServerConfiguration } from 'webpack-dev-server';
 
 type TMode = 'development' | 'production';
 
 interface IEnv {
   mode: TMode;
+  port: number;
 }
 
 export default (env: IEnv) => {
-  const { mode } = env;
+  const { mode, port } = env;
+
+  const isDev = mode === 'development';
 
   const config: webpack.Configuration = {
     mode: mode || 'production',
@@ -42,6 +46,11 @@ export default (env: IEnv) => {
       }),
     ],
   };
+
+  if (isDev) {
+    config.devtool = 'inline-source-map';
+    config.devServer = { port: port || 3000, open: true };
+  }
 
   return config;
 };
