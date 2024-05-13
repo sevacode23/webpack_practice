@@ -1,6 +1,7 @@
 import { resolve } from 'path';
 import webpack from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import type { Configuration as DevServerConfiguration } from 'webpack-dev-server';
 
 type TMode = 'development' | 'production';
@@ -30,7 +31,7 @@ export default (env: IEnv) => {
       rules: [
         {
           test: /\.s[ac]ss$/i,
-          use: ['style-loader', 'css-loader', 'sass-loader'],
+          use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
         },
         {
           test: /\.tsx?$/,
@@ -47,6 +48,10 @@ export default (env: IEnv) => {
     plugins: [
       new HtmlWebpackPlugin({
         template: resolve(__dirname, 'public', 'index.html'),
+      }),
+      new MiniCssExtractPlugin({
+        filename: 'css/[name].[contenthash:8].css',
+        chunkFilename: 'css/[name].[contenthash:8].css',
       }),
     ],
   };
