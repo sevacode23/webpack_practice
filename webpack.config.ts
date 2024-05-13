@@ -18,7 +18,7 @@ export default (env: IEnv) => {
   const config: webpack.Configuration = {
     mode: mode || 'production',
 
-    entry: resolve(__dirname, 'src', 'index.ts'),
+    entry: resolve(__dirname, 'src', 'index.tsx'),
 
     output: {
       path: resolve(__dirname, 'build'),
