@@ -4,9 +4,22 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import { IBuildParams } from './typings';
 
 export const buildLoaders = (params: IBuildParams): ModuleOptions['rules'] => {
-  const cssLoader = {
+  const { isDev } = params;
+
+  const scssLoaders = {
     test: /\.s[ac]ss$/i,
-    use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
+    use: [
+      MiniCssExtractPlugin.loader,
+      {
+        loader: 'css-loader',
+        options: {
+          modules: {
+            localIdentName: isDev ? '[path][name]__[local]' : '[hash:base64:8]',
+          },
+        },
+      },
+      'sass-loader',
+    ],
   };
 
   const tsLoader = {
@@ -15,5 +28,5 @@ export const buildLoaders = (params: IBuildParams): ModuleOptions['rules'] => {
     exclude: /node_modules/,
   };
 
-  return [cssLoader, tsLoader];
+  return [scssLoaders, tsLoader];
 };
