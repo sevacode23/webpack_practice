@@ -13,6 +13,7 @@ export default (env: IEnv) => {
       entry: resolve(__dirname, 'src', 'index.tsx'),
       output: resolve(__dirname, 'build'),
       html: resolve(__dirname, 'public', 'index.html'),
+      src: resolve(__dirname, 'src'),
     },
     port,
     isAnalyze,

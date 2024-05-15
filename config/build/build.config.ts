@@ -21,7 +21,7 @@ export const buildConfig = (params: IBuildParams): Configuration => {
 
     plugins: buildPlugins(params),
     module: { rules: buildLoaders(params) },
-    resolve: buildResolve(),
+    resolve: buildResolve(params),
   };
 
   if (isDev) {

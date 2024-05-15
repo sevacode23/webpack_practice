@@ -4,7 +4,7 @@ import { Main } from './main';
 import { AboutLazy } from './about';
 import { ShopLazy } from './shop';
 
-import { ComponentLoader } from '../components/component-loader';
+import { ComponentLoader } from '@/components/component-loader';
 
 const router = createBrowserRouter([
   {

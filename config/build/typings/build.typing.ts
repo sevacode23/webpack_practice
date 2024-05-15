@@ -10,6 +10,7 @@ export interface IPaths {
   entry: string;
   output: string;
   html: string;
+  src: string;
 }
 
 export interface IBuildParams {
