@@ -2,6 +2,7 @@ import { Configuration, DefinePlugin } from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
+import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 
 import { IBuildParams } from './typings';
 
@@ -10,28 +11,26 @@ export const buildPlugins = (
 ): Configuration['plugins'] => {
   const { paths, isDev, isAnalyze } = params;
 
-  const htmlPlugin = new HtmlWebpackPlugin({
-    template: paths.html,
-  });
-
-  const miniCssExtractPlugin = new MiniCssExtractPlugin({
-    filename: 'css/[name].[contenthash:8].css',
-    chunkFilename: 'css/[name].[contenthash:8].css',
-  });
-
-  const definePlugin = new DefinePlugin({
-    'process.env': JSON.stringify({
-      MODE: isDev ? 'development' : 'production',
-      CUSTOM: 23_002,
+  const plugins: Configuration['plugins'] = [
+    new HtmlWebpackPlugin({
+      template: paths.html,
     }),
 
-    APP_COUNTER_MAX: 10,
-  });
+    new MiniCssExtractPlugin({
+      filename: 'css/[name].[contenthash:8].css',
+      chunkFilename: 'css/[name].[contenthash:8].css',
+    }),
 
-  const plugins: Configuration['plugins'] = [
-    htmlPlugin,
-    miniCssExtractPlugin,
-    definePlugin,
+    new DefinePlugin({
+      'process.env': JSON.stringify({
+        MODE: isDev ? 'development' : 'production',
+        CUSTOM: 23_002,
+      }),
+
+      APP_COUNTER_MAX: 10,
+    }),
+
+    new ForkTsCheckerWebpackPlugin(),
   ];
 
   if (isAnalyze) {

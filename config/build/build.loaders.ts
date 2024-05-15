@@ -24,7 +24,12 @@ export const buildLoaders = (params: IBuildParams): ModuleOptions['rules'] => {
 
   const tsLoader = {
     test: /\.tsx?$/,
-    use: 'ts-loader',
+    use: {
+      loader: 'ts-loader',
+      options: {
+        transpileOnly: true,
+      },
+    },
     exclude: /node_modules/,
   };
 
