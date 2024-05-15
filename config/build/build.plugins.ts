@@ -1,4 +1,4 @@
-import { Configuration } from 'webpack';
+import { Configuration, DefinePlugin } from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
@@ -8,7 +8,7 @@ import { IBuildParams } from './typings';
 export const buildPlugins = (
   params: IBuildParams
 ): Configuration['plugins'] => {
-  const { paths, isAnalyze } = params;
+  const { paths, isDev, isAnalyze } = params;
 
   const htmlPlugin = new HtmlWebpackPlugin({
     template: paths.html,
@@ -19,7 +19,20 @@ export const buildPlugins = (
     chunkFilename: 'css/[name].[contenthash:8].css',
   });
 
-  const plugins: Configuration['plugins'] = [htmlPlugin, miniCssExtractPlugin];
+  const definePlugin = new DefinePlugin({
+    'process.env': JSON.stringify({
+      MODE: isDev ? 'development' : 'production',
+      CUSTOM: 23_002,
+    }),
+
+    APP_COUNTER_MAX: 10,
+  });
+
+  const plugins: Configuration['plugins'] = [
+    htmlPlugin,
+    miniCssExtractPlugin,
+    definePlugin,
+  ];
 
   if (isAnalyze) {
     plugins.push(new BundleAnalyzerPlugin());

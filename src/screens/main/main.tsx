@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Outlet } from 'react-router-dom';
 
 import mountainImage from '@/assets/images/mountain.webp';
@@ -10,6 +10,10 @@ export const Main = () => {
   const [counter, setCounter] = useState(0);
 
   const increment = () => setCounter((prev) => prev + 1);
+
+  useEffect(() => {
+    console.log(process.env, APP_COUNTER_MAX);
+  }, []);
 
   return (
     <div>
