@@ -8,5 +8,6 @@ export const buildDevServer = (params: IBuildParams): Configuration => {
   return {
     port,
     open: true,
+    historyApiFallback: true,
   };
 };

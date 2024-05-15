@@ -1,13 +1,14 @@
 import { Configuration } from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 
 import { IBuildParams } from './typings';
 
 export const buildPlugins = (
   params: IBuildParams
 ): Configuration['plugins'] => {
-  const { paths } = params;
+  const { paths, isAnalyze } = params;
 
   const htmlPlugin = new HtmlWebpackPlugin({
     template: paths.html,
@@ -18,5 +19,11 @@ export const buildPlugins = (
     chunkFilename: 'css/[name].[contenthash:8].css',
   });
 
-  return [htmlPlugin, miniCssExtractPlugin];
+  const plugins: Configuration['plugins'] = [htmlPlugin, miniCssExtractPlugin];
+
+  if (isAnalyze) {
+    plugins.push(new BundleAnalyzerPlugin());
+  }
+
+  return plugins;
 };

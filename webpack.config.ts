@@ -3,7 +3,7 @@ import { resolve } from 'path';
 import { IEnv, buildConfig } from './config/build';
 
 export default (env: IEnv) => {
-  const { mode, port } = env;
+  const { mode, port, isAnalyze } = env;
 
   const isDev = mode === 'development';
 
@@ -15,5 +15,6 @@ export default (env: IEnv) => {
       html: resolve(__dirname, 'public', 'index.html'),
     },
     port,
+    isAnalyze,
   });
 };
