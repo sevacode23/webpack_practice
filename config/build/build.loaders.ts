@@ -28,5 +28,10 @@ export const buildLoaders = (params: IBuildParams): ModuleOptions['rules'] => {
     exclude: /node_modules/,
   };
 
-  return [scssLoaders, tsLoader];
+  const imagesLoader = {
+    test: /\.(png|svg|jpg|jpeg|gif|webp)$/i,
+    type: 'asset/resource',
+  };
+
+  return [scssLoaders, tsLoader, imagesLoader];
 };
