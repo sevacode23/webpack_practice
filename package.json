@@ -10,6 +10,10 @@
     "build:analyze:prod": "webpack --env mode=production isAnalyze=true"
   },
   "devDependencies": {
+    "@babel/core": "^7.24.5",
+    "@babel/preset-env": "^7.24.5",
+    "@babel/preset-react": "^7.24.1",
+    "@babel/preset-typescript": "^7.24.1",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.13",
     "@types/node": "^20.12.11",
     "@types/react": "^18.3.2",
@@ -17,6 +21,7 @@
     "@types/webpack": "^5.28.5",
     "@types/webpack-bundle-analyzer": "^4.7.0",
     "@types/webpack-dev-server": "^4.7.2",
+    "babel-loader": "^9.1.3",
     "copy-webpack-plugin": "^12.0.2",
     "css-loader": "6.8.1",
     "fork-ts-checker-webpack-plugin": "^9.0.2",

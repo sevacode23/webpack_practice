@@ -23,18 +23,33 @@ export const buildLoaders = (params: IBuildParams): ModuleOptions['rules'] => {
     ],
   };
 
-  const tsLoader = {
+  // const tsLoader = {
+  //   test: /\.tsx?$/,
+  //   use: {
+  //     loader: 'ts-loader',
+  //     options: {
+  //       transpileOnly: true,
+  //       getCustomTransformers: () => ({
+  //         before: [isDev && ReactRefreshTypeScript()].filter(Boolean),
+  //       }),
+  //     },
+  //   },
+  //   exclude: /node_modules/,
+  // };
+
+  const babelLoader = {
     test: /\.tsx?$/,
+    exclude: /node_modules/,
     use: {
-      loader: 'ts-loader',
+      loader: 'babel-loader',
       options: {
-        transpileOnly: true,
-        getCustomTransformers: () => ({
-          before: [isDev && ReactRefreshTypeScript()].filter(Boolean),
-        }),
+        presets: [
+          '@babel/preset-env',
+          '@babel/preset-typescript',
+          ['@babel/preset-react', { runtime: isDev ? 'automatic' : 'classic' }],
+        ],
       },
     },
-    exclude: /node_modules/,
   };
 
   const imagesLoader = {
@@ -42,5 +57,5 @@ export const buildLoaders = (params: IBuildParams): ModuleOptions['rules'] => {
     type: 'asset/resource',
   };
 
-  return [scssLoaders, tsLoader, imagesLoader];
+  return [scssLoaders, babelLoader, imagesLoader];
 };

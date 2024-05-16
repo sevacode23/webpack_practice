@@ -20,7 +20,6 @@ export const Main = () => {
       <img className={classes.logo} src={shineImage} />
       <img className={classes.logo} src={mountainImage} />
 
-      <p>Content</p>
       <p>{counter}</p>
 
       <button className={classes.myClass} onClick={increment}>
