@@ -17,7 +17,11 @@ export const Main = () => {
 
   return (
     <div>
-      <img className={classes.logo} src={shineImage} />
+      <img
+        className={classes.logo}
+        src={shineImage}
+        data-testid="testId.shine"
+      />
       <img className={classes.logo} src={mountainImage} />
 
       <p>{counter}</p>

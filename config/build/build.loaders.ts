@@ -2,6 +2,8 @@ import { ModuleOptions } from 'webpack';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import ReactRefreshTypeScript from 'react-refresh-typescript';
 
+import { removeDataTestIdBabelPlugin } from '../babel';
+
 import { IBuildParams } from './typings';
 
 export const buildLoaders = (params: IBuildParams): ModuleOptions['rules'] => {
@@ -48,6 +50,16 @@ export const buildLoaders = (params: IBuildParams): ModuleOptions['rules'] => {
           '@babel/preset-typescript',
           ['@babel/preset-react', { runtime: isDev ? 'automatic' : 'classic' }],
         ],
+        plugins: !isDev
+          ? [
+              [
+                removeDataTestIdBabelPlugin,
+                {
+                  props: ['data-testid'],
+                },
+              ],
+            ]
+          : undefined,
       },
     },
   };
