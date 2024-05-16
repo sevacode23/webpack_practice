@@ -7,7 +7,7 @@ import shineImage from '@/assets/images/shine.jpg';
 import classes from './main.module.scss';
 
 export const Main = () => {
-  const [counter, setCounter] = useState(0);
+  const [counter, setCounter] = useState(1);
 
   const increment = () => setCounter((prev) => prev + 1);
 
@@ -20,6 +20,7 @@ export const Main = () => {
       <img className={classes.logo} src={shineImage} />
       <img className={classes.logo} src={mountainImage} />
 
+      <p>Content</p>
       <p>{counter}</p>
 
       <button className={classes.myClass} onClick={increment}>

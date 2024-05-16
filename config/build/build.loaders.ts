@@ -1,5 +1,6 @@
 import { ModuleOptions } from 'webpack';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import ReactRefreshTypeScript from 'react-refresh-typescript';
 
 import { IBuildParams } from './typings';
 
@@ -28,6 +29,9 @@ export const buildLoaders = (params: IBuildParams): ModuleOptions['rules'] => {
       loader: 'ts-loader',
       options: {
         transpileOnly: true,
+        getCustomTransformers: () => ({
+          before: [isDev && ReactRefreshTypeScript()].filter(Boolean),
+        }),
       },
     },
     exclude: /node_modules/,
