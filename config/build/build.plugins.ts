@@ -4,6 +4,7 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin';
+import CopyPlugin from 'copy-webpack-plugin';
 
 import { IBuildParams } from './typings';
 
@@ -15,6 +16,7 @@ export const buildPlugins = (
   const plugins: Configuration['plugins'] = [
     new HtmlWebpackPlugin({
       template: paths.html,
+      favicon: paths.favicon,
     }),
 
     new MiniCssExtractPlugin({
@@ -32,6 +34,15 @@ export const buildPlugins = (
     }),
 
     new ForkTsCheckerWebpackPlugin(),
+
+    new CopyPlugin({
+      patterns: [
+        {
+          from: paths.localesPublic,
+          to: paths.localesOutput,
+        },
+      ],
+    }),
   ];
 
   if (isDev) {

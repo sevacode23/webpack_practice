@@ -7,13 +7,20 @@ export default (env: IEnv) => {
 
   const isDev = mode === 'development';
 
+  const pathSrc = resolve(__dirname, 'src');
+  const pathPublic = resolve(__dirname, 'public');
+  const pathBuild = resolve(__dirname, 'build');
+
   return buildConfig({
     isDev,
     paths: {
-      entry: resolve(__dirname, 'src', 'index.tsx'),
-      output: resolve(__dirname, 'build'),
-      html: resolve(__dirname, 'public', 'index.html'),
-      src: resolve(__dirname, 'src'),
+      src: pathSrc,
+      entry: resolve(pathSrc, 'index.tsx'),
+      output: pathBuild,
+      html: resolve(pathPublic, 'index.html'),
+      favicon: resolve(pathPublic, 'favicon.ico'),
+      localesPublic: resolve(pathPublic, 'locales'),
+      localesOutput: resolve(pathBuild, 'locales'),
     },
     port,
     isAnalyze,

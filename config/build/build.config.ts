@@ -6,7 +6,6 @@ import { buildResolve } from './build.resolve';
 import { buildPlugins } from './build.plugins';
 import { buildDevServer } from './build.dev-server';
 import { buildDevtool } from './build.devtool';
-
 export const buildConfig = (params: IBuildParams): Configuration => {
   const { isDev, paths } = params;
 

@@ -11,6 +11,9 @@ export interface IPaths {
   output: string;
   html: string;
   src: string;
+  favicon: string;
+  localesPublic: string;
+  localesOutput: string;
 }
 
 export interface IBuildParams {
